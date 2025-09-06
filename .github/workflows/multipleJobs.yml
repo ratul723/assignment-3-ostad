@@ -3,7 +3,7 @@ name: Multi-Jobs workflow
 on: [push, pull_request]
 
 jobs:
-  job1:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -11,14 +11,16 @@ jobs:
       - name: Print Hello world
         run: echo "Hello World"
 
-  job2:
+  build:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Print Job2
         run: echo "This is job 2"
 
-  job3:
+  deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Print job3
         run: echo "This is job3"
